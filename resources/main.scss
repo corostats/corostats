@@ -1,0 +1,44 @@
+// Configuration
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/utilities";
+@import "../node_modules/bootstrap/scss/utilities/api";
+
+// Layout & components
+@import "../node_modules/bootstrap/scss/root";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/type";
+@import "../node_modules/bootstrap/scss/containers";
+@import "../node_modules/bootstrap/scss/grid";
+@import "../node_modules/bootstrap/scss/tables";
+
+$utilities: map-merge($utilities, ("border": map-merge(map-get($utilities, "border"),
+			(responsive: true),
+		),
+	));
+
+.main {
+	margin-top: 2rem;
+
+	h2 {
+		margin-top: 2rem;
+	}
+
+	.language {
+		float: right;
+	}
+
+	td {
+		padding: 0.4rem 1rem;
+	}
+
+	.data-cell {
+		text-align: right;
+	}
+
+	iframe {
+		width: 100%;
+		height: 650px;
+	}
+}
