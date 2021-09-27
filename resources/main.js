@@ -27,14 +27,10 @@ const render = () => {
 }
 
 // Listen for language clicks
-Array.from(document.querySelectorAll('.language__type')).forEach((lang) => lang.addEventListener('click', (e) => {
-	e.stopPropagation();
-
-	localStorage.setItem('corostats.language', e.target.getAttribute('href').replace('#', ''));
+window.addEventListener('hashchange', (e) => {
+	localStorage.setItem('corostats.language', location.hash.replace('#', ''));
 	render();
-
-	return false;
-}));
+});
 
 // Render initially
 render();
