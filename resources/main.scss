@@ -29,6 +29,10 @@ $utilities: map-merge($utilities, ("border": map-merge(map-get($utilities, "bord
 		float: right;
 	}
 
+	.timespan {
+		font-style: italic;
+	}
+
 	td {
 		padding: 0.4rem 1rem;
 	}

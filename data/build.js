@@ -32,6 +32,8 @@ const years = [
 	{ year: '2021', cases: 0, hosp: 0, death: 0 }
 ];
 
+// The last datum entry where the data is fetched from
+let date = { start: null, end: null };
 const read = (name) => {
 	// Get the data source
 	fs.writeFileSync(
@@ -42,8 +44,13 @@ const read = (name) => {
 	// Read the data
 	JSON.parse(fs.readFileSync(__dirname + '/tmp/' + name + '.json')).forEach((stat) => {
 		// Only use the data from Switzerland
-		if (stat.geoRegion !== 'CH') {
+		if (stat.geoRegion !== 'CHFL') {
 			return;
+		}
+
+		// Set the first date
+		if (date.start === null) {
+			date.start = stat.datum;
 		}
 
 		// Find the group and add the entries
@@ -57,6 +64,9 @@ const read = (name) => {
 		if (typeof year === 'object') {
 			year[name] += stat.entries;
 		}
+
+		// Set the actual datum as last date
+		date.end = stat.datum;
 	});
 };
 
@@ -65,5 +75,11 @@ read('cases');
 read('hosp');
 read('death');
 
+// Transform year and week numbers into iso strings
+date.start = date.start.toString();
+date.start = (new Date(date.start.substring(0, 4), 0, (date.start.substring(4) * 7) - 8)).toISOString();
+date.end = date.end.toString();
+date.end = (new Date(date.end.substring(0, 4), 0, 1 + date.end.substring(4) * 7)).toISOString();
+
 // Write the cumulated data to disk
-fs.writeFileSync(__dirname + '/../assets/data.json', JSON.stringify({ stats: data, years: years, date: (new Date()).toISOString() }));
+fs.writeFileSync(__dirname + '/../assets/data.json', JSON.stringify({ stats: data, years: years, date: date }));
