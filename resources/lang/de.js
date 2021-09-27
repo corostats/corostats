@@ -8,7 +8,7 @@ export default {
 	age_intro: "Jede Box repräsentiert einen Altersbereich. Die erste Zahl ist das Total und die zweite in Prozent zum Gesammttotal.",
 	mortality_title: "Sterblichkeit",
 	mortality_intro: "Die erwartete und aktuelle Sterblichkeit im Jahre 2020 - 2021 zwischen jüngeren (0 - 64) and älteren (über 64) Personen. Die Grafik ist vom <a href=\"https://www.bfs.admin.ch/bfs/en/home/statistics/health/state-health/mortality-causes-death.html\" target=\"_blank\">Schweizer Bundesamt für Statistik</a>.",
-	footer: "Diese Seite ist keine offizielle Seite vom BAG. Der Source Code dieser Seite kann eingesehen werden auf <a href=\"github.com/corostats/corostats\" target=\"_blank\">github.com/corostats/corostats</a>.",
+	footer: "Diese Seite ist keine offizielle Seite vom BAG. Der Source Code dieser Seite kann eingesehen werden auf <a href=\"https://github.com/corostats/corostats\" target=\"_blank\">github.com/corostats/corostats</a>.",
 	label: {
 		type: "Typ",
 		total: "Total",
