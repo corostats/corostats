@@ -101,7 +101,8 @@ export default function (language) {
 		});
 
 		// Set the date
-		document.querySelector('.update_date').innerHTML = data.date.substring(0, 10);
+		const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+		document.querySelector('.update_date').innerHTML = (new Date(data.date.start)).toLocaleString('de-DE', options) + ' - ' + (new Date(data.date.end)).toLocaleString('de-DE', options);
 	});
 }
 

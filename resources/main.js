@@ -10,11 +10,16 @@ const render = () => {
 		language = window.navigator.language.substring(0, 2);
 	}
 
+	// When hash is set update the location
+	if (location.hash.length > 1) {
+		language = location.hash.replace('#', '');
+	}
+
 	// Define the translations
 	const translations = language === 'de' ? de : en;
 
 	// Inject the global strings
-	['title', 'intro', 'total_title', 'total_intro', 'age_title', 'age_intro', 'mortality_title', 'mortality_intro', 'footer']
+	['title', 'timespan', 'intro', 'total_title', 'total_intro', 'age_title', 'age_intro', 'mortality_title', 'mortality_intro', 'footer']
 		.forEach((key) => document.querySelector('.' + key.replace('_', '-')).innerHTML = translations[key]);
 
 	// Read the data

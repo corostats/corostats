@@ -1,6 +1,7 @@
 export default {
 	title: "Corona Alterstatistiken für die Schweiz",
-	intro: "Diese Seite macht die Corona Statistiken vom BAG einfach lesbar. Die folgenden Daten wurden von dem <a href=\"https://opendata.swiss/en/dataset/covid-19-schweiz\"  target=\"_blank\">offiziellen Schweizer Open Government Data Hub</a> ausgelesen und sind für alle frei verfügbar. Die Tabellen wurden das letzte mal am <span class=\"update_date\"></span> aktualisiert.",
+	timespan: "Das BAG veröffentlicht die Zahlen immer bis zur vergangenen Woche. Die hier benutzten Daten sind von <span class=\"update_date\"></span>.",
+	intro: "Diese Seite macht die Corona Statistiken vom <a href=\"https://www.bag.admin.ch\" target=\"_blank\">Bundesamt für Gesundheit (BAG)</a> einfach lesbar. Die folgenden Daten wurden von dem <a href=\"https://opendata.swiss/en/dataset/covid-19-schweiz\"  target=\"_blank\">offiziellen Schweizer Open Government Data Hub</a> ausgelesen und sind für alle frei verfügbar.",
 	total_title: "Total pro Jahr",
 	total_intro: "Statistiken aufsummiert pro Jahr.",
 	age_title: "Total pro Altersbereich",

@@ -1,6 +1,7 @@
 export default {
 	title: "Corona age statistics for Switzerland",
-	intro: "This site makes the Corona stats from BAG easy readable. The following data is fetched from the <a href=\"https://opendata.swiss/en/dataset/covid-19-schweiz\"  target=\"_blank\">official Swiss government open data hub</a> and is freely available for everybody. The tables were updated the last time at <span class=\"update_date\"></span>.",
+	timespan: "The Swiss Federal Office of Public Health publishes the numbers till the past weeks. The data which is used on this site is from <span class=\"update_date\"></span>.",
+	intro: "This site makes the Corona stats from <a href=\"https://www.bag.admin.ch\" target=\"_blank\">Federal Office of Public Health (FOPH also BAG called)</a> easy readable. The following data is fetched from the <a href=\"https://opendata.swiss/en/dataset/covid-19-schweiz\"  target=\"_blank\">official Swiss government open data hub</a> and is freely available for everybody.",
 	total_title: "Total per year",
 	total_intro: "Statistic cumulated per year.",
 	age_title: "Total per age range",
