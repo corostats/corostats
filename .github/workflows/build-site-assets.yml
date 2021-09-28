@@ -2,7 +2,7 @@ name: build-site-assets
 on:
   push:
     branches:
-      - main
+      - site
 jobs:
   build-assets:
     runs-on: ubuntu-latest
