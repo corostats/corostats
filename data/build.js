@@ -49,7 +49,7 @@ const read = (name) => {
 	// Read the data
 	entries.forEach((stat) => {
 		// Only use the data from Switzerland
-		if (stat.geoRegion !== 'CHFL') {
+		if (stat.geoRegion !== 'CH') {
 			return;
 		}
 
