@@ -1,8 +1,10 @@
 # Corostats
 
-The Github repo of corostats, a site which makes the [BAG](https://www.bag.admin.ch) statistics easy readable. The [site branch](https://github.com/corostats/corostats/tree/site) contains a running site which the built assets and a generated data. Keep in mind that this data is not up to date.
+The Github repo of corostats, a site which makes the [BAG](https://www.bag.admin.ch) statistics easy readable for humans. The [site branch](https://github.com/corostats/corostats/tree/site) contains a running site which the built assets and a generated data. The data is updated every day, but the BAG publishes the weekly AKL data only on Monday. So what you see is always the data till the end of last week, not including the current week.
 
-It is a zero dependency site and the code doesn't use any framework like vue.js or react as the project is small and the target is to keep the complexity simple.
+A website with most current data can be found [here](https://corostats.github.io/corostats/).
+
+This project is not endorsed in any way with the BAG.
 
 ## Functionality
 The site works the way, that it reads the data from a generated data.json file in the assets folder. This file is a summary from the large data sets of the [Swiss Open Data Hub](https://opendata.swiss/en/dataset/covid-19-schweiz). The following resources are used for the data:
@@ -31,3 +33,6 @@ To automatically build the assets when you change the code, run the following co
 `npm run watch`
 
 `npm run watchsass`
+
+## Dependencies
+It is a zero dependency site and the code doesn't use any framework like vue.js or react as the project is small and the target is to keep the complexity simple. For styling is a subset from Bootstrap 5 used.
