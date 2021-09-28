@@ -35,16 +35,21 @@ const years = [
 // The last datum entry where the data is fetched from
 let date = { start: null, end: null };
 const read = (name) => {
+	console.log('Fetching data for ' + name);
+
 	// Get the data source
 	fs.writeFileSync(
 		__dirname + '/tmp/' + name + '.json',
 		request('GET', 'https://www.covid19.admin.ch/api/data/' + version + '/sources/COVID19' + name.charAt(0).toUpperCase() + name.slice(1) + '_geoRegion_AKL10_w.json').getBody('utf8')
 	);
 
+	const entries = JSON.parse(fs.readFileSync(__dirname + '/tmp/' + name + '.json'));
+	console.log('Found ' + entries.length + ' entries');
+
 	// Read the data
-	JSON.parse(fs.readFileSync(__dirname + '/tmp/' + name + '.json')).forEach((stat) => {
+	entries.forEach((stat) => {
 		// Only use the data from Switzerland
-		if (stat.geoRegion !== 'CHFL') {
+		if (stat.geoRegion !== 'CH') {
 			return;
 		}
 
@@ -68,6 +73,8 @@ const read = (name) => {
 		// Set the actual datum as last date
 		date.end = stat.datum;
 	});
+
+	console.log('Finished to build data for ' + name);
 };
 
 // Build the data
@@ -83,3 +90,4 @@ date.end = (new Date(date.end.substring(0, 4), 0, 1 + date.end.substring(4) * 7)
 
 // Write the cumulated data to disk
 fs.writeFileSync(__dirname + '/../assets/data.json', JSON.stringify({ stats: data, years: years, date: date }));
+console.log('Finished to build data, wrote it to the file ' + __dirname + '/../assets/data.json');

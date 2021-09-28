@@ -1,0 +1,24 @@
+name: build-site-assets
+on:
+  push:
+    branches:
+      - site
+jobs:
+  build-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: site
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm install
+      - run: npm run build
+      - run: git config --global user.name 'corostats'
+      - run: git config --global user.email 'corostats@users.noreply.github.com'
+      - run: git add assets/main.min.css
+      - run: git add assets/main.min.js
+      - run: git commit -m "Automated assets build" || echo "No changes to commit"
+      - run: git push
