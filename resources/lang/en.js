@@ -5,7 +5,7 @@ export default {
 	total_title: "Total per year",
 	total_intro: "Statistic cumulated per year.",
 	age_title: "Total per age range",
-	age_intro: "Each box represents a date range. First number is the total and second one the percentage of the overall total. \"Cases to hospitalization\" and \"Cases to deaths\" do describe the percentage of infected people who had to go to hospital or died.",
+	age_intro: "Each box represents a date range. First number is the total and second one the percentage of the overall total. \"Cases to hospitalization\" and \"Cases to deaths\" do describe the percentage of infected people who had to go to hospital or died. \"Population to vaccinated\" defines the percentage of how many from the age group are vaccinated.",
 	mortality_title: "Mortality",
 	mortality_intro: "The expected and actual death numbers in 2020 - 2021 between young (0 - 64) and elder (above 64). Graph is from <a href=\"https://www.bfs.admin.ch/bfs/en/home/statistics/health/state-health/mortality-causes-death.html\" target=\"_blank\">Swiss federal statistic office</a>.",
 	footer: "This site is not endorsed with BAG. The source code from this site is available for the public at <a href=\"https://github.com/corostats/corostats\" target=\"_blank\">github.com/corostats/corostats</a>.",
