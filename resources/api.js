@@ -4,5 +4,8 @@
  * @returns array
  */
 export function getData() {
-	return fetch('assets/data.json').then((resp) => resp.json());
+	return fetch('assets/stats.json').then((resp) => resp.json());
+}
+export function getMortality() {
+	return fetch('assets/mortality.json').then((resp) => resp.json());
 }
