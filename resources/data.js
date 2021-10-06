@@ -87,7 +87,7 @@ export default function (language) {
 				const section = createElement('section', 'result col-lg-6', '', parent);
 				createElement('h3', 'result__heading', group.range != 'Unbekannt' ? group.range + ' ' + l.years : l.unknown, section);
 
-				sections[group.range] = createElement('table', 'table border', '', section);
+				sections[group.range] = createElement('table', 'table table-borderless border', '', section);
 			}
 		});
 		data.stats['vacc'].forEach((group) => {

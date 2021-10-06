@@ -10,7 +10,7 @@ if (!fs.existsSync(__dirname + '/../assets')) {
 }
 
 // The data with groups
-const data = {
+let data = {
 	covid:
 		[
 			{ range: '0 - 9', cases: 0, hosp: 0, death: 0, pop: 0 },
@@ -122,5 +122,67 @@ date.end = date.end.toString();
 date.end = (new Date(date.end.substring(0, 4), 0, 1 + date.end.substring(4) * 7)).toISOString();
 
 // Write the cumulated data to disk
-fs.writeFileSync(__dirname + '/../assets/data.json', JSON.stringify({ stats: data, years: years, date: date }));
+fs.writeFileSync(__dirname + '/../assets/stats.json', JSON.stringify({ stats: data, years: years, date: date }));
 console.log('Finished to build data, wrote it to the file ' + __dirname + '/../assets/data.json');
+
+console.log('Started to build the mortality data');
+
+// Download the mortality stats
+fs.writeFileSync(
+	__dirname + '/tmp/mortality_2010-2019.csv',
+	request('GET', 'https://www.bfs.admin.ch/bfsstatic/dam/assets/12607335/master').getBody('utf8')
+);
+fs.writeFileSync(
+	__dirname + '/tmp/mortality_2020-2021.csv',
+	request('GET', 'https://www.bfs.admin.ch/bfsstatic/dam/assets/19184445/master').getBody('utf8')
+);
+
+// Setup the data
+date = { start: null, end: null };
+data = [];
+
+//Read the stats for the given date range
+const readCSV = (range) => {
+	// Read the file and split per line
+	fs.readFileSync(__dirname + '/tmp/mortality_' + range + '.csv', 'utf-8').split(/\r\n|\n/).forEach((line, index) => {
+		// Ignore first, empty and lines with comments
+		if (index === 0 || line.length < 1 || line.indexOf('#') === 0) {
+			return;
+		}
+
+		// Get the values
+		const values = line.split(';');
+
+		// Future estimations have as value a dot
+		if (values[4].trim() === '.') {
+			return;
+		}
+
+		// Compile the date
+		const parts = values[2].trim().split('.');
+		date.end = parts[2] + '-' + parts[1] + '-' + parts[0];
+
+		// Push the data
+		data.push({
+			date: date.end,
+			age: values[3].trim() === '65+' ? '65+' : '0 - 64',
+			value: parseInt(values[4].trim()),
+			min: parseInt(values[6].trim()),
+			max: parseInt(values[7].trim())
+		});
+
+		// Create the end date
+		if (date.start === null) {
+			date.start = date.end;
+		}
+	});
+}
+
+// Parse the files and load the data
+readCSV('2010-2019');
+readCSV('2020-2021');
+
+// Write the data file
+fs.writeFileSync(__dirname + '/../assets/mortality.json', JSON.stringify({ stats: data, date: date }));
+
+console.log('Finished to build the mortality data');

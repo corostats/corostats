@@ -21,6 +21,7 @@ export default {
 		cases_to_hospitalization: "Fälle zu Hospitalisierungen",
 		cases_to_deaths: "Fälle zu Tote",
 		population_to_vaccinated: "Population zu Geimpften",
-		unknown: 'Unbekannt'
+		unknown: 'Unbekannt',
+		limit_range: 'Untere und Obere Grenze'
 	}
 }

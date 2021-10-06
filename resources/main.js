@@ -1,6 +1,7 @@
 import en from './lang/en.js';
 import de from './lang/de.js';
 import data from './data.js';
+import mortality from './mortality.js';
 
 // Listen for language clicks
 window.addEventListener('hashchange', (e) => {
@@ -23,6 +24,7 @@ window.addEventListener('hashchange', (e) => {
 
 	// Read the data
 	data(translations);
+	mortality(translations);
 });
 
 if (location.hash.length <= 1) {

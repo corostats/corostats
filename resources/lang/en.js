@@ -21,6 +21,7 @@ export default {
 		cases_to_hospitalization: "Cases to hospitalization",
 		cases_to_deaths: "Cases to deaths",
 		population_to_vaccinated: "Population to vaccinated",
-		unknown: 'Unknown'
+		unknown: 'Unknown',
+		limit_range: 'Lower and upper limit'
 	}
 }
