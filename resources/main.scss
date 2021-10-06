@@ -27,6 +27,10 @@ $utilities: map-merge($utilities, ("border": map-merge(map-get($utilities, "bord
 
 	.language {
 		float: right;
+
+		&__type {
+			padding: 0.5rem;
+		}
 	}
 
 	.timespan {
@@ -35,6 +39,10 @@ $utilities: map-merge($utilities, ("border": map-merge(map-get($utilities, "bord
 
 	td {
 		padding: 0.4rem 1rem;
+	}
+
+	.results-ages {
+		min-height: 600px;
 	}
 
 	.data-cell {

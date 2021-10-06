@@ -4,6 +4,21 @@ import { Chart, LineElement, PointElement, LineController, CategoryScale, Linear
 let chart;
 
 export default function (language) {
+	const o = new IntersectionObserver((entries, observer) => {
+		entries.forEach(entry => {
+			if (!entry.isIntersecting) {
+				return;
+			}
+
+			draw(entry.target, language);
+			observer.disconnect();
+		})
+	}, { threshold: [0.7] });
+
+	o.observe(document.querySelector('.mortality-chart'));
+}
+
+function draw(target, language) {
 	// Delete existing chart
 	if (chart) {
 		chart.destroy();
@@ -45,7 +60,7 @@ export default function (language) {
 		});
 
 		// The chart object
-		chart = new Chart(document.querySelector('.mortality-chart'), {
+		chart = new Chart(target, {
 			type: 'line',
 			data: {
 				labels: stats.date,
