@@ -22,6 +22,14 @@ window.addEventListener('hashchange', (e) => {
 	['title', 'timespan', 'intro', 'total_title', 'total_intro', 'age_title', 'age_intro', 'mortality_title', 'mortality_intro', 'footer']
 		.forEach((key) => document.querySelector('.' + key.replace('_', '-')).innerHTML = translations[key]);
 
+	// Set the title of the page
+	document.querySelector('title').innerHTML = translations['title'];
+	document.querySelector('meta[name="description"]').setAttribute('content', translations['intro']);
+
+
+	// Set the language of the page
+	document.querySelector('html').setAttribute('lang', language);
+
 	// Read the data
 	data(translations);
 	mortality(translations);
