@@ -1,7 +1,14 @@
 import * as api from './api.js';
 import { Chart, LineElement, PointElement, LineController, CategoryScale, LinearScale, Filler, Legend, Tooltip } from 'chart.js';
 
+let chart;
+
 export default function (language) {
+	// Delete existing chart
+	if (chart) {
+		chart.destroy();
+	}
+
 	// Shorthand for the labels
 	const l = language.label;
 
@@ -38,7 +45,7 @@ export default function (language) {
 		});
 
 		// The chart object
-		new Chart(document.querySelector('.mortality-chart'), {
+		chart = new Chart(document.querySelector('.mortality-chart'), {
 			type: 'line',
 			data: {
 				labels: stats.date,
