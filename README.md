@@ -2,7 +2,7 @@
 
 The Github repo of corostats, a site which makes the [BAG](https://www.bag.admin.ch) statistics easy readable for humans. The [site branch](https://github.com/corostats/corostats/tree/site) contains a running site which the built assets and a generated data. The data is updated every day, but the BAG publishes the weekly AKL data only on Monday. So what you see is always the data till the end of last week, not including the current week.
 
-A website with most current data can be found [here](https://corostats.github.io/corostats/).
+A website with most current data can be found [here](https://corostats.ch).
 
 This project is not endorsed in any way with the BAG.
 
