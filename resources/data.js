@@ -67,7 +67,7 @@ export default function (language) {
 		totalVacc = 0;
 
 		// The root node for the ages boxes
-		const parent = document.querySelector('.results_ages');
+		const parent = document.querySelector('.results-ages');
 
 		// Reset the content
 		parent.innerHTML = '';

@@ -41,6 +41,10 @@ $utilities: map-merge($utilities, ("border": map-merge(map-get($utilities, "bord
 		padding: 0.4rem 1rem;
 	}
 
+	.results-ages {
+		min-height: 600px;
+	}
+
 	.data-cell {
 		text-align: right;
 	}
