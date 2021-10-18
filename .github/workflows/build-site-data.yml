@@ -17,6 +17,7 @@ jobs:
       - run: npm run data
       - run: git config --global user.name 'corostats'
       - run: git config --global user.email 'corostats@users.noreply.github.com'
-      - run: git add assets/data.json
+      - run: git add assets/stats.json
+      - run: git add assets/mortality.json
       - run: git commit -m "Automated data build" || echo "No changes to commit"
       - run: git push
