@@ -8,10 +8,12 @@ export default function (language) {
 	api.getData().then((data) => {
 		// The total variables
 		let totalPopulation = 0;
-		let totalCases = 0;
-		let totalHosp = 0;
-		let totalDeath = 0;
+		let totalCovidCases = 0;
+		let totalCovidHosp = 0;
+		let totalCovidDeath = 0;
 		let totalVacc = 0;
+		let totalVacHosp = 0;
+		let totalVacDeath = 0;
 
 		// Reset the data
 		document.querySelector('.results-years').innerHTML = '';
@@ -26,33 +28,35 @@ export default function (language) {
 
 		// Build the totals
 		data.years['covid'].forEach((year) => {
-			totalCases += year.cases;
-			totalHosp += year.hosp;
-			totalDeath += year.death;
+			totalCovidCases += year.cases;
+			totalCovidHosp += year.hosp;
+			totalCovidDeath += year.death;
 
 			// Create the header cell for the year
 			createElement('td', 'data-cell', year.year, row);
 		});
 		data.years['vacc'].forEach((year) => {
 			totalVacc += year.vaccinated;
+			totalVacHosp += year.hosp;
+			totalVacDeath += year.death;
 		});
 
 		// Build the body
 		const body = createElement('tbody', '', '', table);
 
 		row = createElement('tr', '', '', body);
-		createElement('td', '', l.cases, row);
-		createElement('td', 'data-cell', format(totalCases), row);
+		createElement('td', '', l.corona_cases, row);
+		createElement('td', 'data-cell', format(totalCovidCases), row);
 		data.years['covid'].forEach((year) => createElement('td', 'data-cell', format(year.cases), row));
 
 		row = createElement('tr', '', '', body);
-		createElement('td', '', l.hospitalization, row);
-		createElement('td', 'data-cell', format(totalHosp), row);
+		createElement('td', '', l.corona_hospitalization, row);
+		createElement('td', 'data-cell', format(totalCovidHosp), row);
 		data.years['covid'].forEach((year) => createElement('td', 'data-cell', format(year.hosp), row));
 
 		row = createElement('tr', '', '', body);
-		createElement('td', '', l.deaths, row);
-		createElement('td', 'data-cell', format(totalDeath), row);
+		createElement('td', '', l.corona_deaths, row);
+		createElement('td', 'data-cell', format(totalCovidDeath), row);
 		data.years['covid'].forEach((year) => createElement('td', 'data-cell', format(year.death), row));
 
 		row = createElement('tr', '', '', body);
@@ -60,11 +64,23 @@ export default function (language) {
 		createElement('td', 'data-cell', format(totalVacc), row);
 		data.years['vacc'].forEach((year) => createElement('td', 'data-cell', format(year.vaccinated), row));
 
+		row = createElement('tr', '', '', body);
+		createElement('td', '', l.vaccinated_hospitalization, row);
+		createElement('td', 'data-cell', format(totalVacHosp), row);
+		data.years['vacc'].forEach((year) => createElement('td', 'data-cell', format(year.hosp), row));
+
+		row = createElement('tr', '', '', body);
+		createElement('td', '', l.vaccinated_deaths, row);
+		createElement('td', 'data-cell', format(totalVacDeath), row);
+		data.years['vacc'].forEach((year) => createElement('td', 'data-cell', format(year.death), row));
+
 		// Reset the totals
-		totalCases = 0;
-		totalHosp = 0;
-		totalDeath = 0;
+		totalCovidCases = 0;
+		totalCovidHosp = 0;
+		totalCovidDeath = 0;
 		totalVacc = 0;
+		totalVacHosp = 0;
+		totalVacDeath = 0;
 
 		// The root node for the ages boxes
 		const parent = document.querySelector('.results-ages');
@@ -78,9 +94,9 @@ export default function (language) {
 		// Build the totals from the stats
 		data.stats['covid'].forEach((group) => {
 			totalPopulation += group.pop;
-			totalCases += group.cases;
-			totalHosp += group.hosp;
-			totalDeath += group.death;
+			totalCovidCases += group.cases;
+			totalCovidHosp += group.hosp;
+			totalCovidDeath += group.death;
 
 			// Populate the ranges
 			if (sections[group.range] === undefined) {
@@ -92,6 +108,8 @@ export default function (language) {
 		});
 		data.stats['vacc'].forEach((group) => {
 			totalVacc += group.vaccinated;
+			totalVacHosp += group.hosp;
+			totalVacDeath += group.death;
 		});
 
 		// Loop over each age group
@@ -102,25 +120,35 @@ export default function (language) {
 			createElement('td', 'data-cell', ((100 / totalPopulation) * group.pop).toFixed(3) + '%', row);
 
 			row = createElement('tr', '', '', sections[group.range]);
-			createElement('td', '', l.cases + ':', row);
+			createElement('td', '', l.corona_cases + ':', row);
 			createElement('td', 'data-cell', format(group.cases), row);
-			createElement('td', 'data-cell', ((100 / totalCases) * group.cases).toFixed(3) + '%', row);
+			createElement('td', 'data-cell', ((100 / totalCovidCases) * group.cases).toFixed(3) + '%', row);
 
 			row = createElement('tr', '', '', sections[group.range]);
-			createElement('td', '', l.hospitalization + ':', row);
+			createElement('td', '', l.corona_hospitalization + ':', row);
 			createElement('td', 'data-cell', format(group.hosp), row);
-			createElement('td', 'data-cell', ((100 / totalHosp) * group.hosp).toFixed(3) + '%', row);
+			createElement('td', 'data-cell', ((100 / totalCovidHosp) * group.hosp).toFixed(3) + '%', row);
 
 			row = createElement('tr', '', '', sections[group.range]);
-			createElement('td', '', l.deaths + ':', row);
+			createElement('td', '', l.corona_deaths + ':', row);
 			createElement('td', 'data-cell', format(group.death), row);
-			createElement('td', 'data-cell', ((100 / totalDeath) * group.death).toFixed(3) + '%', row);
+			createElement('td', 'data-cell', ((100 / totalCovidDeath) * group.death).toFixed(3) + '%', row);
 		});
 		data.stats['vacc'].forEach((group) => {
 			let row = createElement('tr', '', '', sections[group.range]);
 			createElement('td', '', l.vaccinated + ':', row);
 			createElement('td', 'data-cell', format(group.vaccinated), row);
 			createElement('td', 'data-cell', ((100 / totalVacc) * group.vaccinated).toFixed(3) + '%', row);
+
+			row = createElement('tr', '', '', sections[group.range]);
+			createElement('td', '', l.vaccinated_hospitalization + ':', row);
+			createElement('td', 'data-cell', format(group.hosp), row);
+			createElement('td', 'data-cell', ((100 / totalVacHosp) * group.hosp).toFixed(3) + '%', row);
+
+			row = createElement('tr', '', '', sections[group.range]);
+			createElement('td', '', l.vaccinated_deaths + ':', row);
+			createElement('td', 'data-cell', format(group.death), row);
+			createElement('td', 'data-cell', ((100 / totalVacDeath) * group.death).toFixed(3) + '%', row);
 		});
 		data.stats['covid'].forEach((group) => {
 			let row = createElement('tr', '', '', sections[group.range]);
