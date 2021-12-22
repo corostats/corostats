@@ -93,7 +93,7 @@ const read = (name, group, type, fileName) => {
 
 		// Find the group and add the entries
 		const dataGroup = data[group].find((set) => set.range === stat.altersklasse_covid19);
-		if (typeof dataGroup === 'object') {
+		if (typeof dataGroup === 'object' && !isNaN(stat.entries) && stat.entries !== null) {
 			dataGroup[name] += stat.entries;
 
 			// Population is always the full number, so nothing to summarize
