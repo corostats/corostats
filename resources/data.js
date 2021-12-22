@@ -177,7 +177,7 @@ function createElement(type, classes, content, parent) {
  */
 function format(number) {
 	// Check if it is really a number
-	if (isNaN(number)) {
+	if (isNaN(number) || number === null) {
 		return '0';
 	}
 	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'");
