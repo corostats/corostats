@@ -44,18 +44,7 @@ let data = {
 };
 
 // The years
-const years = {
-	covid:
-		[
-			{ year: '2020', cases: 0, hosp: 0, death: 0 },
-			{ year: '2021', cases: 0, hosp: 0, death: 0 }
-		],
-	vacc:
-		[
-			{ year: '2020', vaccinated: 0 },
-			{ year: '2021', vaccinated: 0 }
-		]
-};
+const years = { covid: [], vacc: [] };
 
 // Fetch the most recent version of the data
 const version = download ? JSON.parse(request('GET', 'https://www.covid19.admin.ch/api/data/context').getBody('utf8')).dataVersion : 0;
@@ -93,7 +82,7 @@ const read = (name, group, type, fileName) => {
 
 		// Find the group and add the entries
 		const dataGroup = data[group].find((set) => set.range === stat.altersklasse_covid19);
-		if (typeof dataGroup === 'object') {
+		if (typeof dataGroup === 'object' && !isNaN(stat.entries) && stat.entries !== null) {
 			dataGroup[name] += stat.entries;
 
 			// Population is always the full number, so nothing to summarize
@@ -103,8 +92,17 @@ const read = (name, group, type, fileName) => {
 		}
 
 		// Find the year and add the entries
-		const year = years[group].find((set) => set.year === (stat.datum ? stat.datum : stat.date).toString().substring(0, 4));
-		if (dataGroup !== undefined && typeof year === 'object') {
+		const yearNumber = (stat.datum ? stat.datum : stat.date).toString().substring(0, 4);
+		let year = years[group].find((set) => set.year === yearNumber);
+
+		// Add year entry
+		if (typeof year !== 'object') {
+			years.covid.push({ year: yearNumber, cases: 0, hosp: 0, death: 0 });
+			years.vacc.push({ year: yearNumber, vaccinated: 0 });
+			year = years[group].find((set) => set.year === yearNumber);
+		}
+
+		if (!isNaN(stat.entries) && stat.entries !== null) {
 			year[name] += stat.entries;
 		}
 
